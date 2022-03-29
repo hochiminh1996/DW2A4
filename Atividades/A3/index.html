@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>DEV FINANÇAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <img src="assets/logo.svg" alt="LOGOMARCA DEVFINANCE">
+    </header>
+    <main class="container">
+        <section id="balance">
+            <h2 class="sr-only">Balanço</h2>
+            <div class="card">
+                <h3>
+                    <span>Entrada</span>
+                    <img src="assets/income.svg" alt="Imagem de entrada">
+
+                </h3>
+                <p>R$ 5.000,00</p>
+            </div>
+
+            <div class="card">
+                <h3>
+                    <span>Saídas</span>
+                    <img src="assets/expense.svg" alt="imagem de saidas">
+                </h3>
+                <p>2.000,00</p>
+
+            </div>
+
+            <div class="card total">
+                <h3>
+                    <span>Total</span>
+                    <img src="assets/total.svg" alt="imagem de total">
+                </h3>
+                <p>3.000,00</p>
+            </div>
+
+        </section>
+
+        <section id="transaction">
+            <h2 class="sr-only">Transações</h2>
+            <a href="#" class="button new" onclick="modal.open();">+Nova transação</a>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="description">Luz</td>
+                        <td class="expense"> -R$ 500,00</td>
+                        <td class="date">21/01/2021</td>
+                    </tr>
+                    <tr>
+                        <td class="description">Criação de WebSite</td>
+                        <td class="income">- R$ 5000,00</td>
+                        <td class="date">21/01/2021</td>
+                    </tr>
+                    <tr>
+                        <td class="description">Internet</td>
+                        <td class="expense">- R$ 200,00</td>
+                        <td class="date">21/01/2021</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+    <div class="modal-overlay"><!--class active-->
+        <div class="modal">
+            <div id="form">
+                <h2>Nova transação</h2>
+                <form action="">
+                    <div class="input-group">
+                        <label for="description" class="sr-only">Descrição</label>
+                        <input type="text" id="description" name="description" placeholder="Descrição">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount" class="sr-only">Descrição</label>
+                        <input type="number" id="amount" step="0.01" name="amount" placeholder="0,00">
+                        <small>Use o sinal de negativo (-) despesas e, (virgula) para casas decimais</small>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="date" class="sr-only">Descrição</label>
+                        <input type="date" id="date" name="date" placeholder="Descrição"> 
+                    </div>
+
+                    <div class="input-group actions">
+                        <a href="" class="button cancel" onclick="modal.close();">Cancelar</a>
+                        <button type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Dev.finance$</p>
+    </footer>
+
+    <script>
+        const modal = {
+            open(){
+                //abrir o modal 
+                //adicionar a classe active
+                document.querySelector(".modal-overlay").classList.add("active");
+
+                /*
+                    DOM = OBJETO E CONTÉM TODO O HTML
+                    É possível acessar todos os atributos e selectores pelo document, DOM, e buscar um selector cuja classe se chama .modal-overlay e adiciona uma nova classe, a active que abre o modal
+                */
+            }, close(){
+                //fechar o modal 
+                //remover a classe active
+        
+                document.querySelector(".modal-overlay").classList.remove("active");
+
+                /*
+                    DOM = OBJETO E CONTÉM TODO O HTML (document)
+                    É possível acessar todos os atributos e selectores pelo document, DOM, e buscar um selector cuja classe se chama .modal-overlay e remover uma classe que ele possui, na caso, a classe active que abre o modal.
+                */
+            }
+        }
+    </script>
+</body>
+
+</html>
