@@ -48,7 +48,7 @@
 
         <section id="transaction">
             <h2 class="sr-only">Transações</h2>
-            <a href="#" class="button new">+Nova transação</a>
+            <a href="#" class="button new" onclick="modal.open();">+Nova transação</a>
             <table id="data-table">
                 <thead>
                     <tr>
@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="input-group actions">
-                        <a href="" class="button cancel">Cancelar</a>
+                        <a href="" class="button cancel" onclick="modal.close();">Cancelar</a>
                         <button type="submit">Salvar</button>
                     </div>
                 </form>
@@ -110,6 +110,31 @@
     <footer>
         <p>Dev.finance$</p>
     </footer>
+
+    <script>
+        const modal = {
+            open(){
+                //abrir o modal 
+                //adicionar a classe active
+                document.querySelector(".modal-overlay").classList.add("active");
+
+                /*
+                    DOM = OBJETO E CONTÉM TODO O HTML
+                    É possível acessar todos os atributos e selectores pelo document, DOM, e buscar um selector cuja classe se chama .modal-overlay e adiciona uma nova classe, a active que abre o modal
+                */
+            }, close(){
+                //fechar o modal 
+                //remover a classe active
+        
+                document.querySelector(".modal-overlay").classList.remove("active");
+
+                /*
+                    DOM = OBJETO E CONTÉM TODO O HTML (document)
+                    É possível acessar todos os atributos e selectores pelo document, DOM, e buscar um selector cuja classe se chama .modal-overlay e remover uma classe que ele possui, na caso, a classe active que abre o modal.
+                */
+            }
+        }
+    </script>
 </body>
 
 </html>
