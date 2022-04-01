@@ -33,7 +33,7 @@ const transaction = [
     {
         id: 2,
         description: "Website",
-        amount: 500000,
+        amount: 520004,
         date: "21/01/2021"
     },
     {
@@ -41,6 +41,12 @@ const transaction = [
         description: "Internet",
         amount: -20000,
         date: "21/01/2021"
+    },
+    {
+        id: 4,
+        description: "Iphone",
+        amount: -52003,
+        date: "21/05/2021"
     },
 ]
 
@@ -79,13 +85,13 @@ const DOM = {
     innerHTMLTransaction(transaction) {
         const CSSClass = transaction.amount > 0 ? "income" : "expense";// USO DE TERNÁRIO
 
-        // const amount = Utils.formatCurrency(transaction.amount);
-        const amount = Utils.formatCurrency(transaction.amount)
+        const amount = Utils.formatCurrency(transaction.amount);
+        //tratando os valores recepcionados : sinal, moeda e casas decimais
 
         // `` PERMITE USAR VARIÁVEIS DENTRO DE TEXTOS
         const html = `
             <td class="description">${transaction.description}</td>
-            <td class="${CSSClass}"> ${transaction.amount}</td>
+            <td class="${CSSClass}"> ${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
                 <img src="assets/minus.svg" alt="remover transação">
@@ -100,7 +106,25 @@ const DOM = {
 
 const Utils = {
     formatCurrency(value) {
-        console.log(value);
+        const signal = Number(value) < 0 ? " - " : "";
+        //salva o sinal
+        
+
+        value = String(value).replace(/\D/g,"");
+        //expressão regular para capturar apenas numeros
+
+        value = Number(value)/100;
+        //faz uma conversão, via divisão, de casas decimais
+
+        value = value.toLocaleString("pt-BR",{
+            style : "currency",
+            currency : "BRL"
+        });
+        //faz uma estilização para moeda e tipo real-br
+
+
+        return signal + value;
+        //returna o valor para a função chamada
     }
 }
 

@@ -293,10 +293,13 @@ input{
 }
 /* FOOTER */
 footer{
-    text-align: center;
+    /* text-align: center; */
     padding: 4rem 0 2rem;
     background-color: #2d4a22;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center  ;
 }
 
 /* RESPONSIVE */
