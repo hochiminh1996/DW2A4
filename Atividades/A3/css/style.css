@@ -158,11 +158,17 @@ header{
     overflow-x: auto;
     display: block;
     width: 100%;
+    /* border: 1px solid red; */
+    min-height: 435px;
+    /* PARA MANTER UM TAMANHO MIN, PARA QUE ELE N FICA PEQUENO
+    SE N HOUVER ELEMENTOS */
 }
 
 #data-table{
     width: 100%;
     border-spacing: 0 0.5rem;
+      
+
     /* 
     border-spacing : X, Y
     X - > EIXO VERTICAL, ESPAÇAMENTO ENTRE COLUNAS
