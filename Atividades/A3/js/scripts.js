@@ -22,37 +22,52 @@ const modal = {
     }
 }
 
-const transaction = [
-    {
-        description: "Luz",
-        amount: -50000,
-        date: "21/01/2021"
+// LOCALSTORAGE
+const storage = {
+    get(){//pegar
+        return JSON.parse(localStorage.getItem("dev-finance:transactions")) || []
+        // transformação de string para obj ou array usando a chave do localstorage, no caso, dev-finance. Ou, se não tiver a chave criado, ou seja vazio [primeira vez salvando], cria uma array vazio
     },
-    {
-        description: "Website",
-        amount: 520004,
-        date: "21/01/2021"
-    },
-    {
-        description: "Internet",
-        amount: -20000,
-        date: "21/01/2021"
-    },
-    {
-        description: "Iphone",
-        amount: -52003,
-        date: "21/05/2021"
-    }, {
-        description: "Salário",
-        amount: 350000,
-        date: "02/04/2022"
+    set(transaction){//setar ou guardar
+        localStorage.setItem("dev-finance:transactions", JSON.stringify(transaction));
+        // recebe dois argumentos : chave e valor. O JSON.stringify está transformando o objeto em uma string, já que o localS trabalha somente com strings
     }
-]
+}
+
 
 // OPERAÇÕES 
 const Transaction = {
-    all: transaction,
-    //é um atalho
+    
+
+    // COMENTADO OS VALORES INSERIDOS MANUALMENTE. OU SEJA, O USUÁRIO, A PARTIR DE AGORA, VAI INSERIR SEUS PRÓPRIOS VALORES EM TRANSAÇÕES
+    // {
+    //     description: "Luz",
+    //     amount: -50000,
+    //     date: "21/01/2021"
+    // },
+    // {
+    //     description: "Website",
+    //     amount: 520004,
+    //     date: "21/01/2021"
+    // },
+    // {
+    //     description: "Internet",
+    //     amount: -20000,
+    //     date: "21/01/2021"
+    // },
+    // {
+    //     description: "Iphone",
+    //     amount: -52003,
+    //     date: "21/05/2021"
+    // }, {
+    //     description: "Salário",
+    //     amount: 350000,
+    //     date: "02/04/2022"
+    // }
+
+    all: storage.get(),
+    //VAI CHAMAR OS VALORES INSERIDOS NO LOCALSTORE, SE HOUVER, OU APRESENTAR UM ARRAY VAZIO
+
     add(transaction) {
         Transaction.all.push(transaction);
         //adicionar uma transação
@@ -169,7 +184,7 @@ const DOM = {
 //FUNÇÃO PARA FORMATAR AS CASAS DECIMAIS E A MOEDA LOCAL
 const Utils = {
     formatAmount(value){
-        value = Number(value.replace(/\,\./g,"")) * 100;
+        value = Number(value) * 100;
         // console.log(value)
 
         return value;
@@ -301,11 +316,18 @@ const App = {
     passa o obj como parâmetro e adiciona dentro da var DOM os dados que já existem, que possui um método para adicionar TR's e TD's de acordo com a quantidade de obj em transation, ou cadastrados.
     */
         Transaction.all.forEach((transaction,index) => {
+           
             DOM.addTransaction(transaction, index);
             // DAQUI QUE VEM O INDICE, POSIÇÃO DOS ELEMENTOS, QUE SERÁ UTILIZADO PARA REMOVER OS ELEMENTOS DO HTML AO SEREM CLICADOS
         })
 
         DOM.updateBalance();//ATUALIZA OS CAMPOS DE ENTRADA, SAIDA E TOTAL
+
+        storage.set(Transaction.all)
+        
+       
+       
+        //SETANDO OS VALORES NO STORAGE
     },
     reload() {
         DOM.clearTransaction();//FAZ UMA LIMPEZA, PARA N ADICIONAR OS MSM ELEMENTOS NOVAMENTE
