@@ -115,19 +115,22 @@ const DOM = {
     transactionsContainer: document.querySelector("#data-table tbody"),
     // BUSCANDO O CONTAINER PRINCIPAL DA TABLE
 
-    addTransaction(transaction, index) {
+    addTransaction(transaction, index) {//estamos passando um indice do array por parametro
         const tr = document.createElement("tr");//CRIA UMA TR
 
-        tr.innerHTML = DOM.innerHTMLTransaction(transaction);
+        tr.innerHTML = DOM.innerHTMLTransaction(transaction,index);
         // TR.innerHTML irá receber os td's da função innerhtml
+        //estamos passando um indice do array por parametro
+
+        tr.dataset.index = index;
 
         DOM.transactionsContainer.appendChild(tr);
         // ADICIONA UMA TR DENTRO DO CONTAINER DA TABLE
 
-
     },
 
-    innerHTMLTransaction(transaction) {
+    innerHTMLTransaction(transaction, index) {
+        //estamos passando um indice do array por parametro
         const CSSClass = transaction.amount > 0 ? "income" : "expense";// USO DE TERNÁRIO
 
         const amount = Utils.formatCurrency(transaction.amount);
@@ -139,7 +142,7 @@ const DOM = {
             <td class="${CSSClass}"> ${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-                <img src="assets/minus.svg" alt="remover transação" onclick="Transaction.remove()">
+                <img src="assets/minus.svg" alt="remover transação" onclick="Transaction.remove(${index})">
             </td>
         `
         return html;
@@ -165,6 +168,24 @@ const DOM = {
 
 //FUNÇÃO PARA FORMATAR AS CASAS DECIMAIS E A MOEDA LOCAL
 const Utils = {
+    formatAmount(value){
+        value = Number(value.replace(/\,\./g,"")) * 100;
+        // console.log(value)
+
+        return value;
+    },
+
+    formatDate(date){
+
+        const splittedDate = date.split("-");
+        // SPLIT VAI DIVIDIR A STRING TODA VEZ QUE ENCONTRAR UM TRAÇO. ALÉM DISSO, É BOM LEMBRAR QUE ELE RETORNA UMA DATA EM INGLÊS : ANO, MÊS DIA. E PRECISAMOS CONFIGURAR PARA VERSÃO PT-BR DIA, MÊSE ANO. ALÉM DISSO, CADA PEDAÇO DA STRING DIVIDIDA. OU SEJA, ANO SERÁ [0], MÊS SERÁ [1] E DIA SERÁ [2]
+        console.log(splittedDate);
+
+
+        return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+        // CONFIGURANDO PARA O PADRÃO DE DATA BRASILEIRO. A [2] CONTÉM O ANO, A [1] CONTÉM O MÊS, E [0] CONTÉM O ANO. ALÉM, CLARO, DO SEPARADOR /
+    },
+
     formatCurrency(value) {
         const signal = Number(value) < 0 ? " - " : "";
         //salva o sinal
@@ -213,16 +234,60 @@ const Form = {
                     throw new Error("Por favor, preencha todos os campos corretamente");
         }
     },
+    
+    formatValues(){
+        let = {
+            description, amount, date
+        } = Form.getValues();
+
+        amount = Utils.formatAmount(amount);
+
+        date = Utils.formatDate(date);
+        // console.log(date);
+
+        return {
+            description,
+            amount,
+            date
+        }//retorna um objeto
+
+    },
+
+    saveTransaction(transaction){
+        Transaction.add(transaction);//adiciona uma nova transação na nossa tabela
+       
+    },
 
     formateDate(){
         console.log("Formatar os dados");
     },
+
+    clearFilds(){
+        Form.description.value = "";
+        Form.amount.value = "";
+        Form.date.value = "";
+    },
+
     submit(event){
         event.preventDefault();
 
         // VERIFICAR OS CAMPOS
         try{
             Form.validateFilds();
+            //VALIDA SE OS DADOS DE ENTRADA SÃO VÁLIDOS
+            
+            const transaction = Form.formatValues();
+            //CAPTURA A ENTRADA DE UM FORMULÁRIO COM VALORES CORRETOS
+            
+            Form.saveTransaction(transaction);
+            //SALVA OS VALORES INSERIDOS E ADICIONA NO ARRAY
+
+            modal.close();//fecha o modal depois de inserir
+            Form.clearFilds(); //limpa os dados inseridos no formulário para a próxima inserção não contenha os mesmos valores
+
+
+            
+
         }catch(error){
             alert(error.message);
         }
@@ -235,8 +300,9 @@ const App = {
         /* ACESSA O OBJ transation, roda um for para cada elemento da função
     passa o obj como parâmetro e adiciona dentro da var DOM os dados que já existem, que possui um método para adicionar TR's e TD's de acordo com a quantidade de obj em transation, ou cadastrados.
     */
-        Transaction.all.forEach( transaction => {
-            DOM.addTransaction(transaction);
+        Transaction.all.forEach((transaction,index) => {
+            DOM.addTransaction(transaction, index);
+            // DAQUI QUE VEM O INDICE, POSIÇÃO DOS ELEMENTOS, QUE SERÁ UTILIZADO PARA REMOVER OS ELEMENTOS DO HTML AO SEREM CLICADOS
         })
 
         DOM.updateBalance();//ATUALIZA OS CAMPOS DE ENTRADA, SAIDA E TOTAL
