@@ -184,10 +184,12 @@ const DOM = {
 //FUNÇÃO PARA FORMATAR AS CASAS DECIMAIS E A MOEDA LOCAL
 const Utils = {
     formatAmount(value){
-        value = value * 100;
-        // console.log(value)
+        // value = value * 100;
+        value = String(value).replace(/\D/g, "");
+        // LIMPA A STRING DOS PONTOS INSERIDOS PELA MÁSCARA
 
         return Math.round(value);
+    
         // ATUALIZAÇÃO E ARREDONDAMENTO
     },
 
@@ -210,8 +212,15 @@ const Utils = {
         value = String(value).replace(/\D/g, "");
         //expressão regular para capturar apenas numeros
 
-        value = Number(value) / 100;
+        value = Number(value)/100;
+        // PARA EFETUAR A CONTA CORRETAMENTE QUANDO PEGAR O NÚMERO SEM MÁSCARA
         //faz uma conversão, via divisão, de casas decimais
+        /*
+            NÚMERO COM MÁSCARA : 100,00
+            NÚMERO QUE TEVE A MÁSCARA RETIRADA : 10000
+            Conversão para o valor correto 10000 / 100 = 100
+        
+        */
 
         value = value.toLocaleString("pt-BR", {
             style: "currency",
@@ -230,7 +239,6 @@ const Form = {
     description : document.querySelector("#description"),
     amount : document.querySelector("#amount"),
     date : document.querySelector("#date"),
-
     getValues(){
         return {
             description : Form.description.value,
@@ -260,6 +268,8 @@ const Form = {
 
         date = Utils.formatDate(date);
         // console.log(date);
+
+        console.log(amount)
 
         return {
             description,
