@@ -251,12 +251,20 @@ const Form = {
         //VERIFICAR SE FORAM PREENCHIDOS
         const { description, amount, date} = Form.getValues();
         
+        const splitDate = date.split("-");
+        console.log(date)
+        console.log(splitDate[0])
+        console.log(splitDate[0].length)
+
 
         if(description.trim() === "" || 
                 amount.trim() === "" ||
                   date.trim() === ""){
                     throw new Error("Por favor, preencha todos os campos corretamente");
+        }else if(splitDate[0] < 1000 || splitDate[0]>=10000){
+            throw new Error("Preencha o ano corretamente")
         }
+       
     },
     
     formatValues(){
@@ -269,7 +277,6 @@ const Form = {
         date = Utils.formatDate(date);
         // console.log(date);
 
-        console.log(amount)
 
         return {
             description,
