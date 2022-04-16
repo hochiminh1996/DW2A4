@@ -171,7 +171,7 @@ header{
     display: block;
     width: 100%;
     /* border: 1px solid red; */
-    min-height: 435px;
+    min-height: 300px;
     /* PARA MANTER UM TAMANHO MIN, PARA QUE ELE N FICA PEQUENO
     SE N HOUVER ELEMENTOS */
 }
