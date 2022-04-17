@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@100&display=swap');
+
+*{
+    
+    margin: 0;
+    padding: 0;
+    font-family: Oswald;
+    outline: none;
+    box-sizing: border-box;
+}
+
+main{
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    width: 600px;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background-color: #d9d9d9;
+    padding: 30px;
+    
+}
+.container{
+    /* border: 1px solid; */
+    width: 500px;
+   
+}
+div.inputs{
+    margin: 0 auto;
+    width: 200px;
+}
+label{
+    display: block;
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, .9);
+}
+input{
+    width: 200px;
+    height: 35px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+}
+input:hover{
+    cursor: pointer;
+    border: 1px solid #09f;
+    box-shadow: 2px 2px 10px  #09f;
+    transition: all linear .5s;
+}

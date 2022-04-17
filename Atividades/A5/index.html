@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/estilo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máscara</title>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="inputs">
+                <h2>Máscaras</h2>
+
+                <label for="cpf">CPF: </label>
+                <input type="text" data-js="cpf" id="cpf" placeholder="000.000.000-00">
+
+                <label>CNPJ: </label>
+                <input type="text" data-js="cnpj" placeholder="00.000.000/0000-00">
+
+                <label>Telefone: </label>
+                <input type="text" data-js="phone" placeholder="(00) 00000-0000">
+
+                <label>Telefone com DDI: </label>
+                <input type="text" data-js="phoneDDI" placeholder="+00 (00) 00000-0000" />
+
+                <label>CEP: </label>
+                <input type="text" data-js="cep" placeholder="00000-000">
+
+                <label>PIS: </label>
+                <input type="text" data-js="pis" placeholder="000.00000.00-0">
+
+                <label>Moeda: </label>
+                <input type="text" data-js="money" placeholder="R$ 0.000.000,00">
+
+                <label>Data:</label>
+                <input type="text" data-js="date" placeholder="00/00/0000">
+
+                <label>Data (usando traço como separador): </label>
+                <input type="text" data-js="dateWithDashes" placeholder="00-00-0000">
+            </div>
+        </div>
+    </main>
+</body>
+<script type="module" src="js/app.js"></script>
+
+</html>
