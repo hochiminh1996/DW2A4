@@ -5,7 +5,8 @@ import { ChatTeardropDots } from "phosphor-react";
 
 import { useState } from "react"; //Controle de Status
 import { Popover } from '@headlessui/react';// Também faz controle de status. A principal diferença é que ele é muito útil na questão de acessibilidade de usuários.
-
+import { WidgetForm } from "./WidgetForm";
+//Import do componente Formulário que aparecerá ao clicar
 
 //Componente 
 export function Widget() {
@@ -32,8 +33,10 @@ export function Widget() {
           Ternário de click 
     */
     return (
-        <Popover className="absolute bottom-5 right-5">
-            <Popover.Panel>Olá</Popover.Panel>
+        <Popover className="absolute bottom-4 right-4 md:bottom-8 md-right-8 flex flex-col items-end">
+            <Popover.Panel>
+                <WidgetForm />
+            </Popover.Panel>
 
 
             <Popover.Button className="bg-violet-500 rounded-full px-3 h-12 flex items-center text-white group">
