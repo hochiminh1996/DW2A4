@@ -87,7 +87,6 @@ export function FeedbackContentStep({
             
             {isSendingFeedback ? <Loading /> : "Enviar feedback"}
           </button>
-          
         </footer>
       </form>
     </>
