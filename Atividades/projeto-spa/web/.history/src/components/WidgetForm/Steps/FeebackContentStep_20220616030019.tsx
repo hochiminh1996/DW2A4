@@ -3,7 +3,6 @@ import { FormEvent, useState } from "react";
 import { FeedbackType, feedbackTypes } from ".."
 import { api } from "../../../lib/api";
 import { CloseButton } from "../../CloseButton"
-import { Loading } from "../../Loading";
 import { ScreenShotButton } from "../ScreenShotButton";
 
 interface FeedbackContentStepProps {
@@ -26,15 +25,10 @@ export function FeedbackContentStep({
 
     const [commment, setComment] = useState("");//Estado para comment
 
-    const [isSendingFeedback, setIsSendingFeedback] = useState(false);
-
-
-    async function handleSubmitFeedback(event: FormEvent) {
+    function handleSubmitFeedback(event: FormEvent) {
         let date = new Date();
         let dataAtual = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
         // console.log(`${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()}`);
-        setIsSendingFeedback(true);
-
         event.preventDefault();
         // console.log({
         //     name,
@@ -46,14 +40,11 @@ export function FeedbackContentStep({
 
 
         await api.post("/feedbacks", {
-            name,
-            email,
+            
             type: feedbackType,
-            commment,
+            comment,
             screenshot,
         });
-        setIsSendingFeedback(true);
-
         onFeedbackSent()
     }
 
@@ -101,12 +92,10 @@ export function FeedbackContentStep({
                     />
                     {/* CHAMANDO COMPONENTE SCREENSHOT */}
 
-                    <button disabled={commment.length === 0 || isSendingFeedback}
+                    <button disabled={commment.length === 0}
                         type="submit" className="p-2  rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-[#06f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-[#09f] transition-colors disabled:opacity-50 disabled:hover:bg-[#09f] bg-[#09f]"
 
-                    >
-                        {isSendingFeedback ? <Loading /> : "Enviar feedback"}
-                    </button>
+                    >Enviar Feedback</button>
                 </footer>
 
             </form>

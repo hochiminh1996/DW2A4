@@ -29,7 +29,7 @@ export function FeedbackContentStep({
     const [isSendingFeedback, setIsSendingFeedback] = useState(false);
 
 
-    async function handleSubmitFeedback(event: FormEvent) {
+    function handleSubmitFeedback(event: FormEvent) {
         let date = new Date();
         let dataAtual = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
         // console.log(`${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()}`);
@@ -49,7 +49,7 @@ export function FeedbackContentStep({
             name,
             email,
             type: feedbackType,
-            commment,
+            comment,
             screenshot,
         });
         setIsSendingFeedback(true);

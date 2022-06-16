@@ -29,7 +29,7 @@ export function FeedbackContentStep({
     const [isSendingFeedback, setIsSendingFeedback] = useState(false);
 
 
-    async function handleSubmitFeedback(event: FormEvent) {
+    function handleSubmitFeedback(event: FormEvent) {
         let date = new Date();
         let dataAtual = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
         // console.log(`${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()}`);
@@ -49,7 +49,7 @@ export function FeedbackContentStep({
             name,
             email,
             type: feedbackType,
-            commment,
+            comment,
             screenshot,
         });
         setIsSendingFeedback(true);
@@ -101,7 +101,7 @@ export function FeedbackContentStep({
                     />
                     {/* CHAMANDO COMPONENTE SCREENSHOT */}
 
-                    <button disabled={commment.length === 0 || isSendingFeedback}
+                    <button disabled={commment.length === 0}
                         type="submit" className="p-2  rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-[#06f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-[#09f] transition-colors disabled:opacity-50 disabled:hover:bg-[#09f] bg-[#09f]"
 
                     >

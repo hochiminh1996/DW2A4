@@ -49,7 +49,7 @@ export function FeedbackContentStep({
             name,
             email,
             type: feedbackType,
-            commment,
+            comment,
             screenshot,
         });
         setIsSendingFeedback(true);
