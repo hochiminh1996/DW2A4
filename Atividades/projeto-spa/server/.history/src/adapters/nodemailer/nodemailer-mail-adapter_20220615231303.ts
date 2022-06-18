@@ -1,3 +1,0 @@
-
-
-export nodemailerMailAdapter imple

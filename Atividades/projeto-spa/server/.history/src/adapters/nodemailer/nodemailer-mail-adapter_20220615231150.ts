@@ -1,3 +1,0 @@
-export NodemailerMailAdapter implements MailAdapter{
-    
-}
